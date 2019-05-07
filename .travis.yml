@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t miguelangeltorresfp/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run miguelangeltorresfp/react-test npm run test
+
+after_success:
+  - docker build -t miguelangeltorresfp/multi-client ./client
+  - docker build -t miguelangeltorresfp/multi-nginx ./nginx
+  - docker build -t miguelangeltorresfp/multi-server ./server
+  - docker build -t miguelangeltorresfp/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passwowrd-stdin
+  # Take those images and push theme to docker hub
+  - docker push miguelangeltorresfp/multi-client
+  - docker push miguelangeltorresfp/multi-nginx
+  - docker push miguelangeltorresfp/multi-server
+  - docker push miguelangeltorresfp/multi-worker
