@@ -10,21 +10,21 @@
     },
     {
       "name": "server",
-      "image": "miguelangeltorres/multi-server",
+      "image": "miguelangeltorresfp/multi-server",
       "hostname": "api",
       "essential": false,
       "memory": 128
     },
     {
       "name": "worker",
-      "image": "miguelangeltorres/multi-worker",
+      "image": "miguelangeltorresfp/multi-worker",
       "hostname": "worker",
       "essential": false,
       "memory": 128
     },
     {
       "name": "nginx",
-      "image": "miguelangeltorres/multi-nginx",
+      "image": "miguelangeltorresfp/multi-nginx",
       "hotname": "nginx",
       "essential": true,
       "portMappings": [
